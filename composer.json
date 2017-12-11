@@ -1,0 +1,26 @@
+{
+    "name": "bonnier/laravel-email-provider",
+    "description": "Laravel package to implement translations from Email Manager",
+    "type": "laravel-package",
+    "require": {
+        "illuminate/support": "^5.4",
+        "illuminate/console": "^5.4",
+        "laravel/framework": "^5.4",
+        "guzzlehttp/guzzle": "^6.2",
+        "bonnier/context-laravel": "^1.3.6"
+    },
+    "authors": [
+        {
+            "name": "Bonnier Publications",
+            "email": "interactive@bonnier.dk"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bonnier\\EmailProvider\\": "src"
+        }
+    },
+    "files": [
+        "src/Helpers/BEmail.php"
+    ]
+}
