@@ -4,6 +4,7 @@ namespace Bonnier\EmailProvider;
 
 use Bonnier\ContextService\Context\Context;
 use Bonnier\ContextService\Models\BpBrand;
+use Bonnier\EmailProvider\Commands\GetEmailCommand;
 use Illuminate\Support\ServiceProvider;
 
 class EmailServiceProvider extends ServiceProvider
@@ -11,10 +12,7 @@ class EmailServiceProvider extends ServiceProvider
     const TRANSLATION_NAMESPACE = 'bonnier';
 
     protected $commands = [
-        'Bonnier\TranslationProvider\Console\Commands\Translation\AddCommand',
-        'Bonnier\TranslationProvider\Console\Commands\Translation\UpdateCommand',
-        'Bonnier\TranslationProvider\Console\Commands\Translation\DeleteCommand',
-        'Bonnier\TranslationProvider\Console\Commands\Translation\GetCommand',
+        GetEmailCommand::class
     ];
 
     private static $translationPath;
