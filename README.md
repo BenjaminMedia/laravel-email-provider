@@ -1,11 +1,11 @@
-# Laravel Translation Provider
+# Laravel Email Provider
 Laravel package that retrieves email translations from translation manager 
 
 
 ## Usage
 To fetch the email
 
-`BEmail::get($key, $replace, $locale)`
+`BonnierMail::get($key, $replace, $locale)`
 
 ## Getting translations
 To get all translations from Email Manager, run:
