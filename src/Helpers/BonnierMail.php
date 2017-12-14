@@ -5,8 +5,8 @@ namespace Bonnier\EmailProvider\Helpers;
 
 use Bonnier\ContextService\Context\Context;
 use Bonnier\EmailProvider\EmailServiceProvider;
+use Bonnier\EmailProvider\Models\EmailTemplate;
 use Illuminate\Support\Facades\File;
-use Parsedown;
 
 class BonnierMail
 {
@@ -15,9 +15,11 @@ class BonnierMail
      * @param array $replace
      * @param null  $locale
      *
-     * @return array ie ['subject' => 'some subject', 'body' => 'some body']
+     * @return \Bonnier\EmailProvider\Models\EmailTemplate
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    public static function get($key, $replace = [], $locale = null) : array
+    public static function get($key, $replace = [], $locale = null) : EmailTemplate
     {
     	$brand = 'default';
     	if(app(Context::class)->getBrand()) {
@@ -31,20 +33,6 @@ class BonnierMail
             $key.'.json'
         ));
 
-    	$tokens = static::format_tokens(array_keys($replace));
-
-        return [
-            'subject' => $email->subject,
-            'body' => Parsedown::instance()->parse(
-                str_replace($tokens, array_values($replace), $email->body)
-            )
-        ];
-    }
-
-    private static function format_tokens($tokens)
-    {
-        return collect($tokens)->map(function($token){
-            return sprintf(':%s:', $token);
-        })->toArray();
+        return new EmailTemplate($email, $replace);
     }
 }
