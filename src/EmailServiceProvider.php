@@ -9,20 +9,17 @@ use Illuminate\Support\ServiceProvider;
 
 class EmailServiceProvider extends ServiceProvider
 {
-    const TRANSLATION_NAMESPACE = 'bonnier';
 
     protected $commands = [
         GetEmailCommand::class
     ];
 
-    private static $translationPath;
+    private static $emailPath;
 
     private static $brandId;
 
     public function boot()
     {
-        $this->loadTranslationsFrom(self::getTemplatePath(), self::TRANSLATION_NAMESPACE);
-
         /** @var BpBrand $brand */
         $brand = app(Context::class)->getBrand();
         if($brand) {
@@ -39,10 +36,10 @@ class EmailServiceProvider extends ServiceProvider
 
     public static function getTemplatePath()
     {
-        if(!self::$translationPath) {
-            self::$translationPath = storage_path('vendor/email-manager/emails');
+        if(!self::$emailPath) {
+            self::$emailPath = storage_path('vendor/email-manager/emails');
         }
-        return self::$translationPath;
+        return self::$emailPath;
     }
 
     public static function getBrandId()
